@@ -11,7 +11,6 @@ router.post('/', function(req, res){
     var scanToAdd = new Scan(req.body);
     scanToAdd.save(function(err, data){
         if(err) {
-            console.log(err);
             res.sendStatus(500);
         } else {
             res.sendStatus(201);
@@ -25,7 +24,6 @@ router.get('/', function (req, res) {
             console.log(err);
             res.sendStatus(500);
         } else {
-            console.log(data);
             res.send(data);
         }
     }

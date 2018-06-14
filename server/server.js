@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var port = 5000;
+var port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:true }));
@@ -12,7 +12,12 @@ app.use(express.static('server/public'));
 var scan = require('./routes/scan');
 app.use('/scan', scan);
 
-var databaseUrl = 'mongodb://localhost:27017/raspberry-rfid';
+var databaseUrl = '';
+if (process.env.MONGODB_URI != undefined){
+    databaseUrl = process.env.MONGODB_URI;
+} else {
+    var databaseUrl = 'mongodb://localhost:27017/raspberry-rfid';
+}
 
 mongoose.connection.on('connected', function() {
     console.log('mongoose is connected');
