@@ -27,7 +27,8 @@ mongoose.connection.on('error', function() {
     console.log('mongoose connection failed');
 })
 
-mongoose.connect(databaseUrl);
+mongoose.connect(databaseUrl).connection;
+
 
 app.listen(port, function() {
     console.log('Listening on port: ', port);
